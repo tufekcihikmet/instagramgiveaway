@@ -54,6 +54,6 @@ class InstagramBot():
             print(user.get_attribute('title'))
 
 
-bot = InstagramBot("alikocakacgun", "SelambenHick")
+bot = InstagramBot("username", "password")
 
 bot.getComments()
