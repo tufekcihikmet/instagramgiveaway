@@ -47,11 +47,20 @@ class InstagramBot():
             except NoSuchElementException:
                 break
 
-        #gets usernames
-        username_XP = "//a[contains(@class,'FPmhX notranslate TlrDj')]"
-        users = self.browser.find_elements_by_xpath(username_XP)
+        #adds usernames into a list
+        users_XP = "//a[contains(@class,'FPmhX notranslate TlrDj')]"
+        users = self.browser.find_elements_by_xpath(users_XP)
+        usernames  = []
         for user in users:
-            print(user.get_attribute('title'))
+            x = user.get_attribute('title')
+            usernames.append(x)
+        #remove duplicate usernames
+        usernames = list(set(usernames))
+        for username in usernames:
+            print(username)
+
+
+
 
 
 bot = InstagramBot("username", "password")
