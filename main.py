@@ -34,19 +34,18 @@ class InstagramBot():
 
     def getComments(self):
         #give post url
-        self.browser.get('https://www.instagram.com/p/BpsdJ56gnfZ/')
+        self.browser.get('https://www.instagram.com/p/Boq7rlKFQ0r/')
 
         #loads all comments by clicking load more button
-        loadmore_XP = "//button[contains(@class,'Z4IfV _0mzm- sqdOP yWX7d        ')]"
-        loadmorebutton = self.browser.find_element_by_xpath(loadmore_XP)
+
         while True :
             try:
+                loadmore_XP = "//button[contains(@class,'Z4IfV _0mzm- sqdOP yWX7d        ')]"
                 loadmorebutton = self.browser.find_element_by_xpath(loadmore_XP)
                 loadmorebutton.click()
                 time.sleep(1)
             except NoSuchElementException:
                 break
-
         #adds usernames into a list
         users_XP = "//a[contains(@class,'FPmhX notranslate TlrDj')]"
         users = self.browser.find_elements_by_xpath(users_XP)
