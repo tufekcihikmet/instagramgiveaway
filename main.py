@@ -12,7 +12,7 @@ import random
 class InstagramBot():
     def __init__(self, email, password):
         chrome_options = Options()
-        chrome_options.add_argument("--headless")
+        #chrome_options.add_argument("--headless")
         self.browser = webdriver.Chrome(chrome_options=chrome_options)
         self.email = email
         self.password = password
@@ -41,9 +41,25 @@ class InstagramBot():
             url = image.get_attribute('src')
             urllib.request.urlretrieve(url, filename)
 
+    #add users profile picture links to .txt file
+    def getUsersPic(self):
+        file = open('userspiclink.txt', 'w')
+        for username in self.usernames:
+            user_link = ('https://www.instagram.com/{}').format(username)
+            self.browser.get(user_link)
+            try:
+                userimage_XP = "//img[1]"
+                userimage = self.browser.find_element_by_xpath(userimage_XP)
+                file.write(username + " " + userimage.get_attribute('src') + '\n')
+            except:
+                userimage_XP = "//img[1]"
+                userimage = self.browser.find_element_by_xpath(userimage_XP)
+                file.write(username + " " + userimage.get_attribute('src') + '\n')
+        file.close()
+
     def getComments(self):
         #give post url
-        self.browser.get('https://www.instagram.com/p/BpzNZZMgOTx/')
+        self.browser.get('https://www.instagram.com/p/Bp3khKVASxk/')
 
         #loads all comments by clicking load more button if exists
         while True :
@@ -60,7 +76,8 @@ class InstagramBot():
 
         for user in users:
             x = user.get_attribute('title')
-            self.usernames.append(x)
+            if x != "fenerlove1907": #delete your accounts name
+                self.usernames.append(x)
 
         #remove duplicate usernames
         self.usernames = list(set(self.usernames))
@@ -76,4 +93,4 @@ class InstagramBot():
 
 bot = InstagramBot("alikocakacgun", "SelambenHick")
 bot.getComments()
-bot.chooseWinner()
+bot.getUsersPic()
