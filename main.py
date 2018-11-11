@@ -92,6 +92,6 @@ class InstagramBot():
         randnumber = random.randint(0, len(self.usernames)-1)
         print("from " + str(len(self.usernames)) +  " participants winner is : " + self.usernames[randnumber])
 
-bot = InstagramBot("alikocakacgun", "SelambenHick")
+bot = InstagramBot("username", "password")
 bot.getComments()
 bot.chooseWinner()
