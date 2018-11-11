@@ -32,6 +32,7 @@ class InstagramBot():
         passwordInput.send_keys(Keys.ENTER)
         time.sleep(5)
 
+    #get all images from hashtag
     def getImage(self):
         self.browser.get('https://www.instagram.com/explore/tags/uniday18/')
         images = self.browser.find_elements_by_tag_name('img')
@@ -41,7 +42,7 @@ class InstagramBot():
             url = image.get_attribute('src')
             urllib.request.urlretrieve(url, filename)
 
-    #add users profile picture links to .txt file
+    #add users names and profile picture links to .txt file
     def getUsersPic(self):
         file = open('userspiclink.txt', 'w')
         for username in self.usernames:
@@ -59,7 +60,7 @@ class InstagramBot():
 
     def getComments(self):
         #give post url
-        self.browser.get('https://www.instagram.com/p/Bp3khKVASxk/')
+        self.browser.get('https://www.instagram.com/p/Bp9iz-iB3Ul/')
 
         #loads all comments by clicking load more button if exists
         while True :
@@ -93,4 +94,4 @@ class InstagramBot():
 
 bot = InstagramBot("alikocakacgun", "SelambenHick")
 bot.getComments()
-bot.getUsersPic()
+bot.chooseWinner()
